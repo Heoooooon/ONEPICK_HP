@@ -1,0 +1,4 @@
+{
+  "cleanUrls": true,
+  "functions": { "api/seo-check.js": { "maxDuration": 20 } }
+}

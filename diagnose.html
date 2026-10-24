@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ONE PICK 무료 홈페이지 진단</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="치과·병의원 홈페이지의 SEO 기본 항목과 AI 인용 준비도(GEO)를 무료로 점검합니다. 제목·설명·H1·canonical·구조화 데이터·FAQ·NAP 정보까지 한 번에 확인하세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: a single diagnostic sheet — input card on the left, live report on the right — on ONE PICK grid paper. */
+:root{
+  --cobalt:#0D3FA6;--cobalt-deep:#08297A;--ink:#0B1A3F;--paper:#F2F5FB;--sky:#AFC4EE;--white:#FFFFFF;--muted:#56658A;
+  --line:rgba(13,63,166,.13);--ok:#1E9E6A;--ok-bg:#E3F5EC;--warn:#D9442F;--warn-bg:#FCE9E6;--mid:#C98A12;--mid-bg:#FBF1DC;
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background-color:var(--paper);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:36px 36px;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+img{max-width:100%}
+[hidden]{display:none!important}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:1220px;margin:0 auto}
+
+header.top{background:var(--cobalt);color:var(--white)}
+header.top .inner{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
+.logo b{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1;background:var(--white);color:var(--cobalt);border-radius:6px;padding:4px 6px 3px}
+.logo span{font-family:var(--f-display);font-size:18px;letter-spacing:.02em}
+.back{color:var(--white);text-decoration:none;font-size:14px;font-weight:700;border:1.5px solid rgba(255,255,255,.5);border-radius:999px;padding:7px 14px}
+
+.hero{background:var(--cobalt);color:var(--white);background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);background-size:36px 36px}
+.hero .inner{padding-block:40px 64px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.18em;color:var(--sky)}
+.hero h1{font-size:clamp(28px,4.4vw,52px);font-weight:900;line-height:1.2;margin-top:12px}
+.hero h1 .box{background:var(--white);color:var(--cobalt);padding:0 .2em;box-shadow:6px 6px 0 rgba(0,0,0,.18)}
+.hero p{color:rgba(255,255,255,.8);margin-top:14px;max-width:44em}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chips span{font-family:var(--f-mono);font-size:12px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 12px}
+
+main .inner{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;padding-block:0 64px;margin-top:-34px;align-items:start}
+@media (max-width:940px){main .inner{grid-template-columns:1fr}}
+.card{background:var(--white);border:1.5px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(8,41,122,.10)}
+.form{padding:24px;position:sticky;top:16px}
+@media (max-width:940px){.form{position:static}}
+.step{display:grid;grid-template-columns:34px 1fr;gap:12px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px dashed var(--line)}
+.step:last-of-type{border-bottom:0;margin-bottom:8px}
+.step > div{min-width:0}
+.num{width:34px;height:34px;border-radius:50%;background:var(--cobalt);color:var(--white);display:grid;place-items:center;font-family:var(--f-display);font-size:17px}
+.step h2{font-size:17px}
+.step p.help{font-size:14px;color:var(--muted);margin-top:4px}
+label.lbl{display:block;font-size:13px;font-weight:700;margin-top:10px}
+input[type=url],textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--paper);color:var(--ink);margin-top:6px}
+input[type=url]:focus,textarea:focus{border-color:var(--cobalt);outline:none;background:var(--white)}
+textarea{min-height:150px;font-family:var(--f-mono);font-size:12.5px;line-height:1.5;resize:vertical}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.links a{font-size:13px;font-weight:700;color:var(--cobalt);text-decoration:none;border:1.5px solid #BFD0F2;border-radius:999px;padding:6px 12px}
+.links a[aria-disabled="true"]{opacity:.4;pointer-events:none}
+kbd{font-family:var(--f-mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px}
+.how{margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted)}
+.how li{margin-top:2px}
+.seg-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.seg-row span{font-size:14px;font-weight:700;font-family:var(--f-mono)}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:var(--white);padding:7px 12px;font-size:13px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--cobalt);color:var(--white);font-weight:700}
+.run{width:100%;border:0;border-radius:14px;background:var(--cobalt);color:var(--white);font-weight:900;font-size:17px;padding:16px;box-shadow:5px 5px 0 rgba(13,63,166,.18);transition:transform .2s}
+.run:hover{transform:translateY(-2px)}
+.run:disabled{opacity:.6;cursor:wait;transform:none}
+.err{color:var(--warn);font-size:14px;margin-top:10px}
+.sample{display:block;margin:12px auto 0;border:0;background:none;color:var(--cobalt);font-size:14px;text-decoration:underline}
+
+.report{padding:24px;min-width:0}
+.rhead{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.ring{position:relative;width:150px;height:150px;flex:none}
+.ring svg{width:150px;height:150px;transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .val b{font-family:var(--f-display);font-weight:400;font-size:52px;line-height:1;font-variant-numeric:tabular-nums}
+.ring .val small{font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.1em}
+.rmeta{flex:1;min-width:200px}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:7px;padding:3px 10px}
+.tag.sample{background:var(--mid-bg);color:var(--mid)}
+.tag.live{background:#E6EDFC;color:var(--cobalt)}
+.grade{font-size:26px;font-weight:900;margin-top:6px}
+.rurl{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.sub{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.sub div{background:var(--paper);border-radius:12px;padding:10px 12px}
+.sub small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted)}
+.sub b{font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.2;font-variant-numeric:tabular-nums}
+.sub i{display:block;height:5px;border-radius:3px;background:#DCE4F4;margin-top:4px;overflow:hidden;font-style:normal}
+.sub i::after{content:"";display:block;height:100%;width:var(--p);background:var(--cobalt);transition:width .8s}
+.prio{margin-top:22px;border-radius:14px;background:var(--cobalt);color:var(--white);padding:16px 18px}
+.prio h3{font-size:15px}
+.prio ol{margin:8px 0 0;padding-left:20px;font-size:14.5px}
+.prio li{margin-top:3px}
+.prio p{font-size:14px;color:rgba(255,255,255,.8)}
+.sec{margin-top:26px}
+.sec h3{font-size:16px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.sec h3 small{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400}
+.items{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+details.it{border:1.5px solid var(--line);border-radius:14px;background:var(--white)}
+details.it[open]{border-color:var(--cobalt)}
+details.it summary{list-style:none;display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;padding:12px 14px;cursor:pointer}
+details.it summary::-webkit-details-marker{display:none}
+.dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;color:var(--white)}
+.dot.p{background:var(--ok)}.dot.f{background:var(--warn)}.dot.u{background:#9AA6C4}
+.it .lab{font-weight:700;font-size:15px;min-width:0}
+.it .lab small{display:block;font-weight:400;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.it .w{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.body{padding:0 16px 16px 46px;font-size:14px}
+.body h4{margin:12px 0 2px;font-size:12px;font-family:var(--f-mono);letter-spacing:.12em;color:var(--cobalt);font-weight:500}
+.body p{color:var(--ink)}
+.body ul{margin:4px 0 0;padding-left:18px;color:var(--ink)}
+.body pre{margin:4px 0 0;background:var(--paper);border-radius:10px;padding:10px 12px;font-family:var(--f-mono);font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:180px;overflow:auto}
+.cta{margin-top:28px;border:1.5px solid var(--cobalt);border-radius:18px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.cta b{font-size:18px;display:block}
+.cta span{font-size:14px;color:var(--muted)}
+.cc{display:flex;gap:8px;flex-wrap:wrap}
+.cc button{border:0;background:var(--cobalt);color:var(--white);font-weight:700;border-radius:10px;padding:10px 14px;font-size:14px;font-variant-numeric:tabular-nums}
+.note{font-size:12.5px;color:var(--muted);margin-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--white);padding:10px 18px;border-radius:999px;font-size:14px;z-index:9;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.flash{animation:flash .7s}
+@keyframes flash{from{box-shadow:0 0 0 6px rgba(13,63,166,.25)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"ONE PICK 무료 홈페이지 진단","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"},"provider":{"@type":"ProfessionalService","name":"원픽마케팅","telephone":"+82-10-2113-6172"}}
+</script>
+</head>
+<body>
+<header class="top gut">
+  <div class="inner">
+    <a class="logo" href="./" aria-label="ONE PICK 홈으로"><b>1P</b><span>ONE PICK</span></a>
+    <a class="back" href="./">← 홈으로</a>
+  </div>
+</header>
+
+<section class="hero gut">
+  <div class="inner">
+    <p class="eyebrow">FREE DIAGNOSIS · SEO + GEO</p>
+    <h1>우리 치과 홈페이지,<br>검색엔진과 <span class="box">AI에게</span> 어떻게 보일까요?</h1>
+    <p>홈페이지 주소를 넣으면 SEO 기본 항목과 AI 인용 준비도 4개 항목을 바로 점검합니다. 입력한 주소와 결과는 저장하지 않습니다.</p>
+    <div class="chips"><span>TITLE</span><span>META</span><span>H1</span><span>CANONICAL</span><span>SCHEMA</span><span>FAQ</span><span>NAP</span><span>ALT</span></div>
+  </div>
+</section>
+
+<main class="gut">
+  <div class="inner">
+    <form class="card form" id="form" novalidate>
+      <div class="step">
+        <span class="num">1</span>
+        <div>
+          <h2>홈페이지 주소 입력</h2>
+          <label class="lbl" for="url">진단할 페이지 주소</label>
+          <input type="url" id="url" placeholder="https://www.example-dental.com" autocomplete="url">
+          <div class="links">
+            <a id="lnk-open" href="#" target="_blank" rel="noopener" aria-disabled="true">홈페이지 열기 ↗</a>
+            <a id="lnk-robots" href="#" target="_blank" rel="noopener" aria-disabled="true">robots.txt 보기 ↗</a>
+            <a id="lnk-sitemap" href="#" target="_blank" rel="noopener" aria-disabled="true">sitemap.xml 보기 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <div>
+          <h2>자동 점검이 안 될 때만: 소스 붙여넣기</h2><p class="help">대부분은 주소만 넣고 바로 진단하기를 누르면 됩니다.</p>
+          <ol class="how">
+            <li>열린 홈페이지에서 <kbd>Ctrl</kbd>+<kbd>U</kbd> (맥은 <kbd>⌥</kbd><kbd>⌘</kbd><kbd>U</kbd>)</li>
+            <li>소스 화면에서 <kbd>Ctrl</kbd>+<kbd>A</kbd> → <kbd>Ctrl</kbd>+<kbd>C</kbd></li>
+            <li>아래 칸에 붙여넣기</li>
+          </ol>
+          <label class="lbl" for="src">HTML 소스</label>
+          <textarea id="src" placeholder="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;title&gt;…"></textarea>
+          <p class="help">PC에서 진행하는 것을 권장합니다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <div>
+          <h2>파일 두 개 확인</h2>
+          <p class="help">1단계의 링크를 눌러 파일이 열리는지 보고 선택해 주세요. 모르면 점수에서 제외됩니다.</p>
+          <div class="seg-row"><span>robots.txt</span><div class="seg" data-k="robots"><button type="button" data-v="yes" aria-pressed="false">있음</button><button type="button" data-v="no" aria-pressed="false">없음</button><button type="button" data-v="unknown" aria-pressed="true">모름</button></div></div>
+          <div class="seg-row"><span>sitemap.xml</span><div class="seg" data-k="sitemap"><button type="button" data-v="yes" aria-pressed="false">있음</button><button type="button" data-v="no" aria-pressed="false">없음</button><button type="button" data-v="unknown" aria-pressed="true">모름</button></div></div>
+        </div>
+      </div>
+      <button class="run" type="submit">무료 진단하기</button>
+      <p class="err" id="err" hidden></p>
+      <button class="sample" type="button" id="btn-sample">예시 결과 다시 보기</button>
+    </form>
+
+    <section class="card report" id="report" aria-live="polite" aria-label="진단 결과">
+      <div class="rhead">
+        <div class="ring" aria-hidden="true">
+          <svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="#DCE4F4" stroke-width="14"/><circle id="arc" cx="75" cy="75" r="64" fill="none" stroke="#0D3FA6" stroke-width="14" stroke-linecap="round" stroke-dasharray="402.1" stroke-dashoffset="402.1" style="transition:stroke-dashoffset 1s"/></svg>
+          <div class="val"><b id="score">0</b><small>/ 100</small></div>
+        </div>
+        <div class="rmeta">
+          <span class="tag sample" id="mode">예시 · 가상의 OO치과 홈페이지</span>
+          <p class="grade" id="grade">—</p>
+          <p class="rurl" id="rurl"></p>
+          <div class="sub">
+            <div><small>SEO 기본</small><b id="s-seo">0</b><i id="b-seo" style="--p:0%"></i></div>
+            <div><small>AI 인용 준비도</small><b id="s-geo">0</b><i id="b-geo" style="--p:0%"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="prio" id="prio"></div>
+      <div class="sec"><h3>SEO 기본 점검 <small id="c-seo"></small></h3><div class="items" id="list-seo"></div></div>
+      <div class="sec"><h3>AI 인용 준비도 (GEO) <small id="c-geo"></small></h3><div class="items" id="list-geo"></div></div>
+      <div class="cta">
+        <div><b>결과를 같이 보고 고칠 순서를 정해드립니다</b><span>원픽마케팅 대표 임현지 · 병의원 마케팅 전문</span></div>
+        <div class="cc"><button type="button" data-copy="010-2113-6172">010-2113-6172 복사</button><button type="button" data-copy="guswl8500@gmail.com">이메일 복사</button></div>
+      </div>
+      <p class="note">이 진단은 붙여넣은 HTML을 기준으로 한 기본 점검입니다. 서버 응답 코드, 페이지 속도, 실제 색인 여부, AI 답변 속 실제 언급 여부는 상담 시 정밀 진단으로 확인해 드립니다.</p>
+    </section>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var state={robots:'unknown',sitemap:'unknown'};
+
+  var SAMPLE='<!DOCTYPE html><html><head><meta charset="utf-8"><title>OO치과</title>'+
+    '<meta name="viewport" content="width=device-width, initial-scale=1"><meta property="og:title" content="OO치과">'+
+    '</head><body><header><h1><img src="/img/logo.png"></h1><nav><a href="/">홈</a><a href="/intro">병원소개</a></nav></header>'+
+    '<section><h1>환자를 가족처럼</h1><img src="/img/main1.jpg"><img src="/img/main2.jpg" alt="진료실"></section>'+
+    '<section><h2>임플란트</h2><p>정성을 다해 진료합니다.</p><h2>교정</h2><p>아름다운 미소를 찾아드립니다.</p></section>'+
+    '<footer><p>대표전화 031-000-0000</p><a href="/reserve">온라인 예약</a></footer></body></html>';
+
+  function norm(u){u=(u||'').trim(); if(!u) return ''; return /^https?:\/\//i.test(u)?u:'https://'+u;}
+  function originOf(u){try{return new URL(u).origin}catch(e){return ''}}
+
+  // step 1 helper links
+  $('url').addEventListener('input',function(){
+    var o=originOf(norm(this.value)), u=norm(this.value);
+    [['lnk-open',u],['lnk-robots',o&&o+'/robots.txt'],['lnk-sitemap',o&&o+'/sitemap.xml']].forEach(function(p){
+      var a=$(p[0]); if(p[1]){a.href=p[1];a.setAttribute('aria-disabled','false')}else{a.href='#';a.setAttribute('aria-disabled','true')}
+    });
+  });
+  [].forEach.call(document.querySelectorAll('.seg'),function(seg){
+    seg.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      [].forEach.call(seg.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      state[seg.getAttribute('data-k')]=b.getAttribute('data-v');
+    });
+  });
+
+  function txt(el){return (el&&el.textContent||'').replace(/\s+/g,' ').trim()}
+
+  function analyze(html,url,files){
+    var doc=new DOMParser().parseFromString(html,'text/html');
+    var q=function(s){return doc.querySelector(s)}, qa=function(s){return [].slice.call(doc.querySelectorAll(s))};
+    var title=txt(q('title'));
+    var desc=((q('meta[name="description" i]')||{}).getAttribute? q('meta[name="description" i]').getAttribute('content'):'')||'';
+    desc=desc.trim();
+    var canon=q('link[rel="canonical" i]'); canon=canon?(canon.getAttribute('href')||'').trim():'';
+    var viewport=!!q('meta[name="viewport" i]');
+    var robotsMeta=(q('meta[name="robots" i]')&&q('meta[name="robots" i]').getAttribute('content')||'').toLowerCase();
+    var noindex=robotsMeta.indexOf('noindex')>-1;
+    var h1s=qa('h1'), h2s=qa('h2'), h3s=qa('h3'), imgs=qa('img');
+    var noAlt=imgs.filter(function(i){return !i.hasAttribute('alt')||!i.getAttribute('alt').trim()&&i.getAttribute('alt')!==''? !i.hasAttribute('alt'):false});
+    noAlt=imgs.filter(function(i){return !i.hasAttribute('alt')});
+    var ld=qa('script[type="application/ld+json" i]');
+    var ldTypes=[]; ld.forEach(function(s){try{collect(JSON.parse(s.textContent),ldTypes)}catch(e){}});
+    var body=doc.body?doc.body.cloneNode(true):doc.createElement('body');
+    [].forEach.call(body.querySelectorAll('script,style,noscript'),function(n){n.remove()});
+    var bodyText=txt(body), words=bodyText?bodyText.split(' ').length:0;
+    var tel=qa('a[href^="tel:" i]').length, mail=qa('a[href^="mailto:" i]').length;
+    var ctaRe=[/문의/,/상담/,/예약/,/신청/,/연락/,/견적/,/시작하기/,/무료/,/지금/,/바로/,/contact/i,/consult/i,/apply/i];
+    var cta=qa('a,button').filter(function(e){var t=e.textContent;return ctaRe.some(function(r){return r.test(t)})}).length;
+    var og={t:attr('meta[property="og:title"]'),d:attr('meta[property="og:description"]'),i:attr('meta[property="og:image"]')};
+    function attr(s){var e=q(s);return e?(e.getAttribute('content')||'').trim():''}
+    function collect(o,arr){ if(!o) return; if(Array.isArray(o)){o.forEach(function(x){collect(x,arr)});return}
+      if(typeof o==='object'){ var t=o['@type']; if(t) arr.push.apply(arr,[].concat(t)); if(o['@graph']) collect(o['@graph'],arr);
+        Object.keys(o).forEach(function(k){ if(k!=='@graph'&&typeof o[k]==='object') collect(o[k],arr)}) } }
+    var lang=(doc.documentElement.getAttribute('lang')||'').trim();
+    var medTypes=['Dentist','MedicalClinic','MedicalBusiness','MedicalOrganization','Hospital','Physician','LocalBusiness'];
+    var med=ldTypes.filter(function(t){return medTypes.indexOf(t)>-1});
+    var faqSchema=ldTypes.indexOf('FAQPage')>-1;
+    var qHeads=h2s.concat(h3s).filter(function(h){return /\?\s*$|나요\s*$|까요\s*$|인가요\s*$/.test(txt(h))});
+    var phoneTxt=(bodyText.match(/0\d{1,2}[-.\s]?\d{3,4}[-.\s]?\d{4}/)||[])[0]||'';
+    var addrTxt=(bodyText.match(/[가-힣]+(시|도)\s?[가-힣]+(구|군|시)\s?[가-힣0-9]+(로|길|동)\s?\d*/)||bodyText.match(/[가-힣0-9]+(로|길)\s?\d+(-\d+)?/)||[])[0]||'';
+    var origin=originOf(url);
+    var status=files.status;
+
+    var seo=[];
+    if(status) seo.push({label:'페이지 접근',passed:status===200,w:12,detail:status===200?'HTTP 200으로 접근됩니다':'HTTP '+status+' 응답',
+        problem:'검사 주소가 HTTP '+status+'로 응답했습니다. 200이 아니면 검색엔진과 환자가 페이지를 안정적으로 볼 수 없습니다.',rec:'서버 오류, 리다이렉트, 접근 제한, SSL 문제를 확인해 HTTP 200으로 응답하게 하세요.',how:['브라우저에서 주소가 열리는지 확인','호스팅 로그에서 4xx·5xx 원인 확인','불필요한 리다이렉트와 접근 제한 제거'],ex:['검사 주소: '+url,'현재 상태 코드: '+status]});
+    seo=seo.concat([
+      {label:'색인 허용',passed:!noindex,w:12,detail:noindex?'noindex가 있습니다':'noindex 없음',
+        problem:'meta robots에 noindex가 있으면 검색 결과에 페이지가 노출되지 않습니다.',rec:'검색 노출이 필요한 페이지라면 noindex를 제거하세요.',how:['<meta name="robots" content="noindex"> 제거','CMS·SEO 플러그인의 검색 노출 허용 설정 확인','robots.txt에서 해당 경로를 막고 있지 않은지 확인'],ex:[robotsMeta?'현재 robots meta: '+robotsMeta:'robots meta 없음']},
+      {label:'제목 태그 (title)',passed:title.length>=10&&title.length<=70,w:10,detail:title?title.length+'자 · '+title:'title 태그가 없습니다',
+        problem:'title은 검색 결과의 제목입니다. 없거나 너무 짧거나 길면 클릭률과 키워드 이해도가 떨어집니다.',rec:'진료 키워드 + 지역 + 병원명을 넣어 10~70자로 작성하세요.',how:['<head> 안의 <title> 수정','중요 키워드를 앞쪽에 배치','페이지마다 다른 제목 사용'],ex:['현재: '+(title||'없음')+' ('+title.length+'자)','예: 수원 임플란트 치과 | 잇몸뼈 이식까지 상담 | OO치과']},
+      {label:'설명 메타 (description)',passed:desc.length>=50&&desc.length<=160,w:10,detail:desc?desc.length+'자':'meta description이 없습니다',
+        problem:'description은 검색 결과 설명으로 쓰입니다. 없거나 길이가 맞지 않으면 클릭률이 낮아집니다.',rec:'페이지 내용을 요약하고 상담·예약 안내를 넣어 50~160자로 작성하세요.',how:['<meta name="description" content="..."> 추가','페이지별로 다른 문구 작성'],ex:['현재: '+(desc||'없음')+' ('+desc.length+'자)']},
+      {label:'H1 구조',passed:h1s.length===1,w:8,detail:h1s.length===0?'H1이 없습니다':h1s.length===1?'1개':h1s.length+'개 (1개 권장)',
+        problem:'H1은 페이지의 대표 제목입니다. 없거나 여러 개면 검색엔진이 페이지 주제를 판단하기 어렵습니다.',rec:'페이지마다 핵심 주제를 담은 H1을 1개만 쓰고, 하위 제목은 H2·H3로 정리하세요.',how:['대표 제목 하나만 <h1>로 유지','로고나 반복 섹션의 h1은 h2 또는 div로 변경','H1에 진료 키워드를 자연스럽게 포함'],ex:h1s.length?h1s.slice(0,5).map(function(h,i){return (i+1)+'. '+(txt(h)||'(텍스트 없음 · 이미지만 있음)')}):['현재 H1 없음']},
+      {label:'모바일 viewport',passed:viewport,w:8,detail:viewport?'있음':'viewport 메타가 없습니다',
+        problem:'viewport가 없으면 모바일 화면이 축소되어 보이고 모바일 검색에 불리합니다.',rec:'head에 viewport 메타 태그를 추가하세요.',how:['<meta name="viewport" content="width=device-width, initial-scale=1"> 추가'],ex:[viewport?'viewport 감지됨':'viewport 미감지']},
+      {label:'canonical',passed:!!canon,w:8,detail:canon||'canonical이 없습니다',
+        problem:'canonical이 없으면 주소가 여러 개일 때 검색엔진이 대표 주소를 판단하기 어렵습니다.',rec:'현재 페이지의 대표 주소를 canonical로 지정하세요.',how:['<link rel="canonical" href="대표 주소"> 추가','http/https, www 유무, 끝 슬래시 규칙 통일'],ex:[canon?'현재: '+canon:'권장 예: '+(url||'https://도메인/페이지')]},
+      {label:'robots.txt',passed:files.robots==='yes',unknown:files.robots==='unknown',w:7,detail:files.robots==='yes'?'있음':files.robots==='no'?'찾지 못함':'확인 안 함 (점수 제외)',
+        problem:'robots.txt가 없으면 크롤러 정책과 사이트맵 위치를 알려주기 어렵습니다.',rec:'도메인 루트에 robots.txt를 만들고 사이트맵 주소를 넣으세요.',how:['루트에 robots.txt 생성','Sitemap: https://도메인/sitemap.xml 추가','중요 페이지를 Disallow로 막지 않았는지 확인'],ex:['확인 위치: '+(origin?origin+'/robots.txt':'https://도메인/robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://도메인/sitemap.xml']},
+      {label:'sitemap.xml',passed:files.sitemap==='yes',unknown:files.sitemap==='unknown',w:7,detail:files.sitemap==='yes'?'있음':files.sitemap==='no'?'찾지 못함':'확인 안 함 (점수 제외)',
+        problem:'sitemap.xml이 없으면 검색엔진이 중요한 페이지 목록을 빨리 파악하지 못합니다.',rec:'sitemap.xml을 만들어 구글 서치콘솔과 네이버 서치어드바이저에 제출하세요.',how:['/sitemap.xml 생성','주요 페이지 주소와 lastmod 포함','서치콘솔·서치어드바이저에 제출'],ex:['확인 위치: '+(origin?origin+'/sitemap.xml':'https://도메인/sitemap.xml')]},
+      {label:'Open Graph',passed:!!(og.t&&og.d&&og.i),w:6,detail:'title '+(og.t?'있음':'없음')+' · description '+(og.d?'있음':'없음')+' · image '+(og.i?'있음':'없음'),
+        problem:'OG 정보가 부족하면 카카오톡·SNS로 공유할 때 제목·설명·이미지가 제대로 나오지 않습니다.',rec:'og:title, og:description, og:image를 모두 설정하세요.',how:['og:title / og:description 메타 추가','1200×630 비율의 og:image 추가'],ex:['og:title: '+(og.t||'없음'),'og:description: '+(og.d||'없음'),'og:image: '+(og.i||'없음')]},
+      {label:'구조화 데이터',passed:ld.length>0,w:5,detail:ld.length?ld.length+'개 JSON-LD'+(ldTypes.length?' · '+ldTypes.slice(0,4).join(', '):''):'구조화 데이터가 없습니다',
+        problem:'구조화 데이터가 없으면 검색엔진이 병원 정보·FAQ·의료진 정보를 풍부하게 이해하기 어렵습니다.',rec:'Dentist, FAQPage 등 페이지 성격에 맞는 JSON-LD를 추가하세요.',how:['<script type="application/ld+json">으로 추가','병원명·주소·전화·진료시간 등 실제 정보 입력','구글 리치 결과 테스트로 오류 확인'],ex:['현재 JSON-LD: '+ld.length+'개']},
+      {label:'이미지 ALT',passed:imgs.length===0||noAlt.length===0,w:4,detail:imgs.length?'이미지 '+imgs.length+'개 중 ALT 누락 '+noAlt.length+'개':'이미지 없음',
+        problem:'alt가 없는 이미지는 검색엔진과 스크린리더가 내용을 알 수 없습니다.',rec:'의미 있는 이미지에는 내용을 설명하는 alt를, 장식 이미지는 alt=""를 넣으세요.',how:['누락된 <img>에 alt 추가','키워드 나열 대신 이미지 내용을 문장으로 설명'],ex:noAlt.length?noAlt.slice(0,6).map(function(i,k){return (k+1)+'. <img src="'+(i.getAttribute('src')||'src 없음')+'">'}):['ALT 누락 없음']},
+      {label:'본문 콘텐츠',passed:words>=300,w:5,detail:words+'단어',
+        problem:'본문이 너무 적으면 검색엔진이 진료 주제와 전문성을 판단하기 어렵습니다.',rec:'진료 설명, 장점, 과정, FAQ를 충분히 채우세요.',how:['진료별 설명을 300단어 이상으로 보강','H2·H3로 주제별 섹션 구성','실제 환자 질문을 FAQ로 추가'],ex:['현재: '+words+'단어','권장: 300단어 이상']},
+      {label:'문의 경로',passed:tel>0||mail>0||cta>0,w:5,detail:'전화 링크 '+tel+' · 이메일 '+mail+' · 상담/예약 버튼 '+cta,
+        problem:'상담·예약 버튼이나 전화 링크가 없으면 방문자가 다음 행동을 하기 어렵습니다.',rec:'상단·본문·하단에 상담/예약 버튼과 전화 링크를 두세요.',how:['tel: 링크로 전화 버튼 추가','온라인 예약·상담 신청 버튼 추가'],ex:['tel 링크 '+tel+' · mailto '+mail+' · CTA 텍스트 '+cta]}
+    ]);
+    var geo=[
+      {label:'의료기관 구조화 데이터',passed:med.length>0,w:6,detail:med.length?med.join(', '):'Dentist·MedicalClinic 등 유형 없음',
+        problem:'AI는 페이지가 어떤 기관인지 구조화 데이터로 먼저 확인합니다. 의료기관 유형이 없으면 일반 웹문서로만 이해합니다.',rec:'Dentist(또는 MedicalClinic) 유형으로 병원명·주소·전화·진료시간·의료진을 표시하세요.',how:['"@type": "Dentist" JSON-LD 추가','address, telephone, openingHours, url 입력','원장은 Person(또는 Physician)으로 연결'],ex:['감지된 유형: '+(ldTypes.length?ldTypes.join(', '):'없음')]},
+      {label:'질문형 콘텐츠 · FAQ',passed:faqSchema||qHeads.length>=3,w:5,detail:'FAQPage '+(faqSchema?'있음':'없음')+' · 질문형 소제목 '+qHeads.length+'개',
+        problem:'AI 답변은 환자 질문 단위로 만들어집니다. 질문에 바로 답하는 블록이 없으면 인용될 문장이 부족합니다.',rec:'"임플란트 통증은 어느 정도인가요?" 같은 질문형 소제목과 FAQ를 진료별로 3개 이상 만드세요.',how:['진료 페이지마다 FAQ 섹션 추가','소제목을 환자 질문 형태로 작성','답변 첫 문장에 결론을 먼저 쓰기'],ex:qHeads.length?qHeads.slice(0,5).map(function(h,i){return (i+1)+'. '+txt(h)}):['질문형 소제목 없음']},
+      {label:'병원 기본정보 (NAP)',passed:!!phoneTxt&&!!addrTxt,w:5,detail:'전화 '+(phoneTxt?'있음':'없음')+' · 주소 '+(addrTxt?'있음':'없음'),
+        problem:'병원명·주소·전화(NAP)가 텍스트로 없으면 AI와 지도 검색이 같은 병원으로 연결하기 어렵습니다.',rec:'푸터와 오시는 길에 병원명·도로명 주소·대표전화를 이미지가 아닌 텍스트로 넣으세요.',how:['주소·전화를 이미지 대신 텍스트로 작성','네이버 플레이스·구글 비즈니스 정보와 똑같이 맞추기'],ex:['전화: '+(phoneTxt||'감지 안 됨'),'주소: '+(addrTxt||'감지 안 됨')]},
+      {label:'언어 지정 (lang)',passed:/^ko/i.test(lang),w:3,detail:lang?'lang="'+lang+'"':'lang 속성이 없습니다',
+        problem:'언어가 지정되지 않으면 검색엔진과 AI가 페이지 언어를 추정해야 합니다.',rec:'<html lang="ko">로 한국어 페이지임을 명시하세요.',how:['<html> 태그에 lang="ko" 추가'],ex:['현재: '+(lang||'없음')]}
+    ];
+    return {seo:seo,geo:geo,title:title};
+  }
+
+  function pct(list){var tw=0,pw=0;list.forEach(function(c){if(c.unknown)return;tw+=c.w;if(c.passed)pw+=c.w});return tw?Math.round(pw/tw*100):0}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function item(c){
+    var cls=c.unknown?'u':c.passed?'p':'f', mark=c.unknown?'?':c.passed?'✓':'!';
+    var h='<details class="it"'+(!c.passed&&!c.unknown?'':'')+'><summary><span class="dot '+cls+'" aria-label="'+(c.unknown?'확인 안 함':c.passed?'통과':'개선 필요')+'">'+mark+'</span><span class="lab">'+esc(c.label)+'<small>'+esc(c.detail)+'</small></span><span class="w">'+c.w+'점</span></summary><div class="body">';
+    if(!c.passed){h+='<h4>문제</h4><p>'+esc(c.problem)+'</p><h4>권장</h4><p>'+esc(c.rec)+'</p><h4>고치는 방법</h4><ul>'+c.how.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'}
+    h+='<h4>현재 값</h4><pre>'+esc(c.ex.join('\n'))+'</pre></div></details>';
+    return h;
+  }
+  function render(r,url,isSample){
+    var all=r.seo.concat(r.geo), score=pct(all), s1=pct(r.seo), s2=pct(r.geo);
+    $('score').textContent=score;
+    $('arc').style.strokeDashoffset=(402.1*(1-score/100)).toFixed(1);
+    $('arc').style.stroke=score>=85?'#1E9E6A':score>=60?'#0D3FA6':'#D9442F';
+    $('grade').textContent=score>=85?'좋음 · 기본기가 잘 갖춰져 있습니다':score>=60?'보통 · 몇 군데만 고치면 됩니다':'개선 필요 · 검색과 AI에 잘 안 보입니다';
+    $('rurl').textContent=url||'주소 미입력';
+    var m=$('mode'); m.textContent=isSample?'예시 · 가상의 OO치과 홈페이지':'내 홈페이지 진단 결과'; m.className='tag '+(isSample?'sample':'live');
+    $('s-seo').textContent=s1; $('b-seo').style.setProperty('--p',s1+'%');
+    $('s-geo').textContent=s2; $('b-geo').style.setProperty('--p',s2+'%');
+    var cnt=function(l){var f=l.filter(function(c){return !c.passed&&!c.unknown}).length;return '통과 '+l.filter(function(c){return c.passed}).length+' · 개선 '+f}
+    $('c-seo').textContent=cnt(r.seo); $('c-geo').textContent=cnt(r.geo);
+    var fails=all.filter(function(c){return !c.passed&&!c.unknown}).sort(function(a,b){return b.w-a.w});
+    $('prio').innerHTML=fails.length?'<h3>먼저 고칠 3가지</h3><ol>'+fails.slice(0,3).map(function(c){return '<li><b>'+esc(c.label)+'</b> · '+esc(c.rec)+'</li>'}).join('')+'</ol>':'<h3>모든 기본 항목을 통과했습니다</h3><p>다음 단계는 AI 답변 속 실제 언급 여부를 측정하는 정밀 진단입니다.</p>';
+    $('list-seo').innerHTML=r.seo.map(item).join('');
+    $('list-geo').innerHTML=r.geo.map(item).join('');
+    var rep=$('report'); rep.classList.remove('flash'); void rep.offsetWidth; rep.classList.add('flash');
+  }
+
+  function showSample(){render(analyze(SAMPLE,'https://www.oo-dental.example',{robots:'no',sitemap:'unknown'}),'https://www.oo-dental.example',true)}
+  $('btn-sample').addEventListener('click',function(){showSample(); if(innerWidth<940) $('report').scrollIntoView({behavior:'smooth'})});
+
+  function setSeg(k,v){var seg=document.querySelector('.seg[data-k="'+k+'"]');[].forEach.call(seg.children,function(x){x.setAttribute('aria-pressed',x.getAttribute('data-v')===v?'true':'false')});state[k]=v}
+  function done(){ if(innerWidth<940) $('report').scrollIntoView({behavior:'smooth'}) }
+  $('form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var html=$('src').value.trim(), url=norm($('url').value), err=$('err'), btn=document.querySelector('.run');
+    err.hidden=true;
+    if(html){
+      if(html.length<40||!/<(html|head|body|title|meta|div)/i.test(html)){err.textContent='붙여넣은 내용이 HTML 소스가 아닙니다. 홈페이지에서 Ctrl+U로 연 소스 화면 전체를 복사해 주세요.';err.hidden=false;$('src').focus();return}
+      render(analyze(html,url,{robots:state.robots,sitemap:state.sitemap}),url,false); done(); return;
+    }
+    if(!url){err.textContent='홈페이지 주소를 입력해 주세요.';err.hidden=false;$('url').focus();return}
+    btn.disabled=true; btn.textContent='점검 중…';
+    fetch('/api/seo-check?url='+encodeURIComponent(url)).then(function(r){return r.json()}).then(function(j){
+      if(!j||!j.success) throw new Error(j&&j.error||'');
+      var d=j.data; setSeg('robots',d.robots?'yes':'no'); setSeg('sitemap',d.sitemap?'yes':'no');
+      render(analyze(d.html,d.url,{robots:state.robots,sitemap:state.sitemap,status:d.statusCode}),d.url,false); done();
+    }).catch(function(x){
+      err.textContent=(x&&x.message?x.message+' ':'')+'자동 점검을 할 수 없는 사이트입니다. 2단계 방법으로 소스를 붙여넣고 다시 진단해 주세요.';err.hidden=false;
+    }).then(function(){btn.disabled=false;btn.textContent='무료 진단하기'});
+  });
+
+  var toast=$('toast'),tt;
+  function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('show')},1800)}
+  [].forEach.call(document.querySelectorAll('[data-copy]'),function(b){b.addEventListener('click',function(){
+    var v=b.getAttribute('data-copy');
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(function(){say('복사했습니다 · '+v)},function(){say(v)})}else say(v);
+  })});
+
+  showSample();
+})();
+</script>
+</body>
+</html>
