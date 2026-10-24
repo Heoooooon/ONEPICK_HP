@@ -471,6 +471,57 @@ body.on-blue .tc,body.on-blue .rank{color:rgba(255,255,255,.7)}
 .toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--white);padding:10px 18px;border-radius:999px;font-size:14px;z-index:70;transition:all .3s var(--ease);pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
+/* ---------- results: 3D paper ---------- */
+.results{background:#08080a;color:#f2f2f0}
+.results .wrap{padding-block:104px 56px}
+.results .eyebrow{color:var(--sky)}
+.results .lead{color:rgba(242,242,240,.72)}
+.results .hl{background:var(--white);color:#08080a}
+.rp-stage{position:relative;height:clamp(460px,62vh,640px);margin-top:30px;border-radius:24px;overflow:hidden;background:#08080a;isolation:isolate;touch-action:pan-y;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.rp-bg{position:absolute;inset:0;z-index:1;display:grid;place-items:center;overflow:hidden;pointer-events:none}
+.rp-bg span{font-family:var(--f-display);font-size:clamp(96px,17vw,280px);line-height:.8;letter-spacing:.01em;white-space:nowrap;color:rgba(242,242,240,.11);user-select:none}
+.rp-dof{position:absolute;inset:-30px;z-index:2;pointer-events:none;backdrop-filter:blur(2.4px);-webkit-backdrop-filter:blur(2.4px);background:rgba(8,8,10,.05)}
+.rp-gl{position:absolute;inset:0;z-index:3;width:100%;height:100%;display:block}
+.rp-grain,.rp-grain2{position:absolute;inset:0;z-index:4;pointer-events:none;background-repeat:repeat;background-size:160px 160px}
+.rp-grain{opacity:.05;mix-blend-mode:overlay}.rp-grain2{opacity:.02}
+.rp-vig{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,rgba(0,0,0,0) 42%,rgba(0,0,0,.52) 100%)}
+.rp-hint{position:absolute;left:0;right:0;bottom:22px;z-index:6;pointer-events:none;text-align:center;font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,240,.36);opacity:0;transition:opacity .8s ease}
+.rp-hint b{font-weight:500;color:rgba(242,242,240,.66)}
+.rp-stage.is-static .rp-gl,.rp-stage.is-static .rp-hint{display:none}
+.rp-still{position:absolute;inset:0;z-index:3;display:grid;place-items:center;perspective:1200px}
+.rp-still canvas{max-height:86%;max-width:80%;width:auto;height:auto;border-radius:14px;background:linear-gradient(140deg,rgba(196,210,232,.20),rgba(196,210,232,.05) 55%,rgba(196,210,232,.12));box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.2);transform:rotateY(-14deg) rotateX(5deg) rotateZ(-1.5deg);animation:rpfloat 7s ease-in-out infinite}
+@keyframes rpfloat{0%,100%{transform:rotateY(-14deg) rotateX(5deg) rotateZ(-1.5deg) translateY(0)}50%{transform:rotateY(-8deg) rotateX(3deg) rotateZ(-.5deg) translateY(-8px)}}
+.rp-list{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.rp-item{display:flex;flex-direction:column;justify-content:flex-start;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px;color:#f2f2f0;transition:background .3s,border-color .3s}
+.rp-item small{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--sky)}
+.rp-item b{display:block;font-size:17px;margin-top:4px}
+.rp-item span{display:block;font-size:14px;line-height:1.5;color:rgba(242,242,240,.72);margin-top:2px}
+.rp-item[aria-pressed="true"]{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.7)}
+.rp-note{margin-top:14px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;color:rgba(242,242,240,.48);line-height:1.6}
+@media (max-width:900px){.rp-list{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.rp-stage{height:500px;min-height:0}}
+@media (max-width:520px){.rp-list{grid-template-columns:1fr}}
+
+/* ---------- site footer: neon sky ---------- */
+.site-foot{--neon:#3FD8FF;position:relative;overflow:hidden;background:#040608;color:#fff}
+.site-foot .fw{position:relative;max-width:1220px;margin:0 auto;padding:88px max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.fcol small{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.18em;color:#7C8796;margin-bottom:14px}
+.fcol a,.fcol p{display:block;font-size:18px;line-height:1.95;color:#fff;text-decoration:none}
+.fcol a:hover,.fcol a:focus-visible{color:var(--neon)}
+.fmark{font-family:var(--f-display);font-weight:400;color:var(--neon);text-shadow:0 0 14px rgba(63,216,255,.55),0 0 42px rgba(63,216,255,.28);line-height:.8;white-space:nowrap;user-select:none}
+.site-foot .fmark{max-width:1220px;margin:24px auto 0;padding:0 16px;font-size:clamp(96px,17.6vw,250px);text-align:center;letter-spacing:.01em}
+.fcopy{max-width:1220px;margin:0 auto;padding:26px 16px calc(28px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:16px;font-size:15px;color:#8C97A6}
+.fcopy span:last-child{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em}
+@media (max-width:620px){
+  .site-foot{min-height:100svh;display:flex;flex-direction:column}
+  .site-foot .fw{grid-template-columns:1fr;gap:44px;padding-top:72px;padding-right:150px;flex:1}
+  .fcol small{margin-bottom:10px}
+  .fcol a,.fcol p{font-size:19px;line-height:1.85}
+  .site-foot .fmark{position:absolute;right:10px;bottom:calc(24px + env(safe-area-inset-bottom,0px));margin:0;padding:0;font-size:150px;line-height:.86;writing-mode:vertical-rl;transform:rotate(180deg);text-align:left}
+  .fcopy{display:block;padding-right:150px;font-size:16px}
+  .fcopy span:last-child{display:none}
+}
+
 @media (max-width:620px){
   .wrap{padding-block:96px 64px}
   .giant{font-size:clamp(56px,19vw,100px)}
@@ -783,6 +834,26 @@ body.on-blue .tc,body.on-blue .rank{color:rgba(255,255,255,.7)}
   </div>
 </section>
 
+<!-- 8-2 RESULTS (3D Paper) -->
+<section class="scene results" id="results" data-blue aria-labelledby="h-results">
+  <div class="wrap">
+    <p class="eyebrow rv">Proof · 2026.10</p>
+    <h2 class="h2 rv d1" id="h-results">말이 아니라,<br>매일 쌓이는 <span class="hl">실제 기록</span>.</h2>
+    <p class="lead rv d2">원픽이 지금 맡고 있는 병원의 네이버 플레이스 순위와 카페 발행 기록입니다. 원픽 대시보드가 매일 모은 숫자만 옮겨습니다.</p>
+    <div class="rp-stage rv d2" id="rp-stage">
+      <div class="rp-bg" aria-hidden="true"><span>ONE PICK</span></div>
+      <div class="rp-dof" aria-hidden="true"></div>
+      <canvas class="rp-gl" aria-label="원픽 성과 카드 3D 화면. 아래 목록과 같은 내용입니다" role="img"></canvas>
+      <div class="rp-grain" aria-hidden="true"></div>
+      <div class="rp-grain2" aria-hidden="true"></div>
+      <div class="rp-vig" aria-hidden="true"></div>
+      <div class="rp-hint" aria-hidden="true"><b>Drag</b> 돌려보기 &nbsp;·&nbsp; <b>Hover</b> 빛 비추기</div>
+    </div>
+    <div class="rp-list rv d3" id="rp-list" aria-label="성과 카드 선택"></div>
+    <p class="rp-note rv d4">기준일 2026.10.20 · 순위: 애드로그 순위 시트 일별 기록 · 카페: 발행 시트에 글 주소가 남은 건 · 병원명은 익명 표기</p>
+  </div>
+</section>
+
 <!-- 9 ECOSYSTEM -->
 <section class="scene blue grid-bg" id="system" data-blue aria-labelledby="h-sys">
   <div class="wrap">
@@ -845,6 +916,26 @@ body.on-blue .tc,body.on-blue .rank{color:rgba(255,255,255,.7)}
 </section>
 
 </main>
+
+<footer class="site-foot" aria-label="사이트 정보">
+  <div class="fw">
+    <nav class="fcol" aria-label="페이지 메뉴"><small>MENU</small>
+      <a href="#top">처음으로</a><a href="#cms">CMS 관리자</a><a href="#ai">원장칼럼 AI</a><a href="#geo">AI 검색 인용</a><a href="#results">성과 기록</a><a href="#faq">자주 묻는 질문</a>
+    </nav>
+    <div class="fcol"><small>SERVICE</small>
+      <a href="diagnose.html">무료 홈페이지 진단</a><a href="#contact">문의하기</a>
+    </div>
+    <div class="fcol"><small>CONTACT</small>
+      <a href="tel:010-2113-6172">010-2113-6172</a><a href="mailto:guswl8500@gmail.com">guswl8500@gmail.com</a>
+    </div>
+    <div class="fcol"><small>COMPANY</small>
+      <p>원픽마케팅</p><p>대표 임현지</p>
+    </div>
+  </div>
+  <div class="fmark" aria-hidden="true">ONE PICK</div>
+  <div class="fcopy"><span>2026 &copy; ONE PICK 원픽마케팅</span><span>FROM SEARCH TO CHOICE.</span></div>
+</footer>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -978,6 +1069,8 @@ body.on-blue .tc,body.on-blue .rank{color:rgba(255,255,255,.7)}
   });
 })();
 </script>
+<script src="assets/three.r149.min.js" defer></script>
+<script src="assets/results-paper.js" defer></script>
 
 </body>
 </html>
